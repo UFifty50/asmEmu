@@ -10,7 +10,7 @@
 int main(int argc, char** argv) {
     std::ifstream f;
     argParser parser(argc, argv, true);
-    parser.registerShortArg('i', "Input file to compile into a ROM", false, true, [&f](std::string in) { f = std::ifstream(in); });
+    parser.registerLongArg('i', "Input file to compile into a ROM", false, true, [&f](std::string in) { f = std::ifstream(in); });
     parser.parse();
     std::string str;
     if(f) {

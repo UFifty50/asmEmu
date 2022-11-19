@@ -31,7 +31,7 @@ public:
     argParser(int argc, char** argv, bool defaultHelp = true);
 
     void registerShortArg(char shortArg, std::string description, bool required, bool requiresInput, std::function<void(passableArgs)> function);
-    void registerLongArg(std::string longArg, std::string description, bool required, bool requiresInput, std::optional<std::reference_wrapper<std::function<void(std::string)>>> function = std::nullopt, std::string alias = "");
+    void registerLongArg(std::string longArg, std::string description, bool required, bool requiresInput, std::optional<std::function<void(std::string)>> function = std::nullopt, std::string alias = "");
 
     void parse();
 };
