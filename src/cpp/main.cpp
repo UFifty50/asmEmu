@@ -19,5 +19,5 @@ int main(int argc, char** argv) {
         str = ss.str();
     }
     std::cout << str;
-    return 1;
+    return 0;
 }

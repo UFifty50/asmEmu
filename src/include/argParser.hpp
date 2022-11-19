@@ -6,12 +6,18 @@
 #include <functional>
 
 
+union passableArgs {
+    std::string s;
+    std::nullptr_t v;
+};
+
 struct arg {
     std::string name;
     std::string alias;
     std::string description;
     bool required;
-    std::function<void(std::string)> callback;
+    bool requiresInput;
+    std::function<void(passableArgs)> callback;
 };
 
 class argParser {
@@ -24,8 +30,8 @@ private:
 public:
     argParser(int argc, char** argv, bool defaultHelp = true);
 
-    void registerShortArg(char shortArg, std::string description, bool required, bool requiresInput, std::function<void(std::optional<std::string>)> function);
-    void registerLongArg(std::string shortArg, std::string description, bool required, bool requiresInput, std::function<void(std::optional<std::string>)> function, std::string alias = "");
+    void registerShortArg(char shortArg, std::string description, bool required, bool requiresInput, std::function<void(passableArgs)> function);
+    void registerLongArg(std::string longArg, std::string description, bool required, bool requiresInput, std::optional<std::reference_wrapper<std::function<void(std::string)>>> function = std::nullopt, std::string alias = "");
 
     void parse();
 };
